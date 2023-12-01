@@ -9,3 +9,7 @@
     gap: 24px;
     row-gap: 24px;
 }
+
+.gallery-item {
+    list-style-type: none;
+}

@@ -66,26 +66,35 @@ const images = [
     },
   ];
 
-  const galleryList = document.querySelector('.gallery')
-  
+  const galleryList = document.querySelector('.gallery');
+  const galleryLink = document.querySelector('a.gallery-link');
+  const galleryImage = document.querySelector('img.gallery-image');
+
 
   const galleryListItems = images.map(image => {
-    const galleryIteam = document.createElement('li');
-    galleryIteam.style.listStyleType = 'none'; 
-    galleryIteam.classList.add('gallery-item');
-    const galleryLink = document.createElement('a');
-    galleryLink.classList.add('gallery-link');
+
     galleryLink.href = image.original;
+    galleryImage.src = image.preview;
+    galleryImage.dataset.source = image.original;
+    galleryImage.alt = image.description; 
+
+    const listItem = document.createElement('li');
+    listItem.classList.add('gallery-item');
+
+    const linkElement = document.createElement('a');
+    linkElement.classList.add('gallery-link');
+    linkElement.href = image.original;
+
     const imgElement = document.createElement('img');
     imgElement.classList.add('gallery-image');
     imgElement.src = image.preview;
-    imgElement.setAttribute('data-source', image.original);
+    imgElement.dataset.source = image.original;
     imgElement.alt = image.description;
 
-    galleryIteam.appendChild(galleryLink);
-    galleryLink.appendChild(imgElement);
+    linkElement.appendChild(imgElement);
+    listItem.appendChild(linkElement);
 
-    return galleryIteam;
+    return listItem; 
   })
 
   galleryList.append(...galleryListItems);
