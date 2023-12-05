@@ -67,37 +67,27 @@ const images = [
   ];
 
   const galleryList = document.querySelector('.gallery');
-  const galleryLink = document.querySelector('a.gallery-link');
-  const galleryImage = document.querySelector('img.gallery-image');
 
 
-  const galleryListItems = images.map(image => {
+  const galleryListItems = createLiElement(images);
 
-    galleryLink.href = image.original;
-    galleryImage.src = image.preview;
-    galleryImage.dataset.source = image.original;
-    galleryImage.alt = image.description; 
+  galleryList.insertAdjacentHTML("beforeend", galleryListItems);
 
-    const listItem = document.createElement('li');
-    listItem.classList.add('gallery-item');
-
-    const linkElement = document.createElement('a');
-    linkElement.classList.add('gallery-link');
-    linkElement.href = image.original;
-
-    const imgElement = document.createElement('img');
-    imgElement.classList.add('gallery-image');
-    imgElement.src = image.preview;
-    imgElement.dataset.source = image.original;
-    imgElement.alt = image.description;
-
-    linkElement.appendChild(imgElement);
-    listItem.appendChild(linkElement);
-
-    return listItem; 
-  })
-
-  galleryList.append(...galleryListItems);
+  function createLiElement(galleryItems) {
+    return galleryItems.map(({preview, original, description}) => {
+      return `
+      <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
+          <img 
+            class="gallery-image"
+            src="${preview}"
+            data-source="${original}"
+            alt="${description}"> 
+            />
+        </a>
+      </li>`;
+    }).join("");
+  };
 
   galleryList.addEventListener('click', (event) => {
     event.preventDefault(); 
@@ -122,7 +112,3 @@ const images = [
     }); 
    } 
 });
-
-  
-
-    
