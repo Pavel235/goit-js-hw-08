@@ -82,11 +82,11 @@ const images = [
             class="gallery-image"
             src="${preview}"
             data-source="${original}"
-            alt="${description}"> 
-            />
+            alt="${description}" /> 
         </a>
       </li>`;
-    }).join("");
+    })
+    .join("");
   };
 
   galleryList.addEventListener('click', (event) => {
@@ -112,3 +112,5 @@ const images = [
     }); 
    } 
 });
+
+
